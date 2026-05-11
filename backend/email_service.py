@@ -1,47 +1,37 @@
 import os
-import smtplib
-from email.mime.multipart import MIMEMultipart
-from email.mime.text import MIMEText
 
+import resend
 from dotenv import load_dotenv
 
 
-def _get_env(name: str, *, required: bool = True, default: str | None = None) -> str:
-    value = os.environ.get(name, default)
-    if required and (value is None or str(value).strip() == ""):
-        raise RuntimeError(f"Не установлена переменная окружения {name}")
-    return value if value is not None else ""
+def _load_env() -> None:
+    for candidate in [
+        os.path.join(os.path.dirname(__file__), ".env"),
+        os.path.join(os.path.dirname(__file__), "..", ".env"),
+        "/etc/secrets/.env",
+    ]:
+        if os.path.exists(candidate):
+            load_dotenv(dotenv_path=candidate)
+            break
 
 
 def send_reservation_email(
     *, name: str, phone: str, guests: str, date: str, destination: str
 ) -> None:
-    # Ищем .env в нескольких местах
-    for _candidate in [
-        os.path.join(os.path.dirname(__file__), ".env"),
-        os.path.join(os.path.dirname(__file__), "..", ".env"),
-        "/etc/secrets/.env",
-    ]:
-        if os.path.exists(_candidate):
-            load_dotenv(dotenv_path=_candidate)
-            break
+    _load_env()
 
-    # SMTP_HOST - адрес SMTP сервера, например: smtp.gmail.com
-    smtp_host = _get_env("SMTP_HOST")
-    # SMTP_PORT - порт SMTP, например: 587 для STARTTLS (рекомендуется)
-    smtp_port = int(_get_env("SMTP_PORT"))
-    # SMTP_USER - логин/почта отправителя, например: yourmail@gmail.com
-    smtp_user = _get_env("SMTP_USER")
-    # SMTP_PASSWORD - пароль приложения SMTP (НЕ обычный пароль почты)
-    smtp_password = _get_env("SMTP_PASSWORD")
-    # TO_EMAIL - адрес, на который будут приходить заявки
-    to_email = _get_env("TO_EMAIL")
-    # FROM_EMAIL - адрес отправителя (можно не задавать, тогда будет использоваться SMTP_USER)
-    from_email = os.environ.get("FROM_EMAIL", smtp_user)
-    # SMTP_USE_TLS - использовать ли STARTTLS (true/false). Для порта 587 укажите true
-    use_tls = os.environ.get("SMTP_USE_TLS", "true").lower() in {"1", "true", "yes"}
+    api_key = os.environ.get("RESEND_API_KEY", "").strip()
+    if not api_key:
+        raise RuntimeError("Не установлена переменная окружения RESEND_API_KEY")
 
-    subject = "Новое бронирование"
+    to_email = os.environ.get("TO_EMAIL", "").strip()
+    if not to_email:
+        raise RuntimeError("Не установлена переменная окружения TO_EMAIL")
+
+    from_email = os.environ.get("FROM_EMAIL", "onboarding@resend.dev").strip()
+
+    resend.api_key = api_key
+
     body = (
         f"Имя: {name}\n"
         f"Телефон: {phone}\n"
@@ -50,48 +40,12 @@ def send_reservation_email(
         f"Направление: {destination}\n"
     )
 
-    message = MIMEMultipart()
-    message["From"] = from_email
-    message["To"] = to_email
-    message["Subject"] = subject
-    message.attach(MIMEText(body, "plain", _charset="utf-8"))
+    params = {
+        "from": from_email,
+        "to": [to_email],
+        "subject": "Новое бронирование",
+        "text": body,
+    }
 
-    # Улучшенная логика подключения к SMTP серверу
-    server = None
-    try:
-        if use_tls:
-            # Для TLS соединения (порт 587)
-            server = smtplib.SMTP(smtp_host, smtp_port, timeout=20)
-            server.ehlo()
-            server.starttls()
-            server.ehlo()
-        else:
-            # Для SSL соединения (порт 465)
-            server = smtplib.SMTP_SSL(smtp_host, smtp_port, timeout=20)
-
-        # Аутентификация
-        server.login(smtp_user, smtp_password)
-
-        # Отправка письма (UTF-8)
-        server.sendmail(from_email, [to_email], message.as_string())
-        print("Письмо успешно отправлено!")
-
-    except smtplib.SMTPAuthenticationError as err:
-        raise RuntimeError(
-            "Ошибка аутентификации SMTP: проверьте логин/пароль или пароль приложения"
-        ) from err
-    except smtplib.SMTPConnectError as err:
-        raise RuntimeError(
-            "Ошибка подключения к SMTP серверу: проверьте хост/порт/доступ в сеть"
-        ) from err
-    except smtplib.SMTPException as err:
-        raise RuntimeError(f"SMTP ошибка: {err}") from err
-    except Exception as err:
-        raise RuntimeError(f"Неизвестная ошибка при отправке письма: {err}") from err
-    finally:
-        # Всегда закрываем соединение
-        try:
-            if server is not None:
-                server.quit()
-        except Exception:
-            pass  # Игнорируем ошибки при закрытии соединения
+    response = resend.Emails.send(params)
+    print(f"Письмо отправлено, id: {response['id']}")
