@@ -150,7 +150,7 @@ $(document).ready(function() {
         phoneInput.reportValidity();
         return;
       }
-      const url = form.getAttribute('action') || 'https://booking-api-irt8.onrender.com/api/reservations';
+      const url = 'https://booking-api-irt8.onrender.com/api/reservations';
       const formData = new FormData(form);
       const payload = Object.fromEntries(formData.entries());
       if (phoneInput) {
