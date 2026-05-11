@@ -2,6 +2,7 @@ import os
 import smtplib
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
+
 from dotenv import load_dotenv
 
 
@@ -12,10 +13,18 @@ def _get_env(name: str, *, required: bool = True, default: str | None = None) ->
     return value if value is not None else ""
 
 
-def send_reservation_email(*, name: str, phone: str, guests: str, date: str, destination: str) -> None:
-    # Загружаем .env из каталога backend на случай прямого вызова функции
-    dotenv_path = os.path.join(os.path.dirname(__file__), ".env")
-    load_dotenv(dotenv_path=dotenv_path)
+def send_reservation_email(
+    *, name: str, phone: str, guests: str, date: str, destination: str
+) -> None:
+    # Ищем .env в нескольких местах
+    for _candidate in [
+        os.path.join(os.path.dirname(__file__), ".env"),
+        os.path.join(os.path.dirname(__file__), "..", ".env"),
+        "/etc/secrets/.env",
+    ]:
+        if os.path.exists(_candidate):
+            load_dotenv(dotenv_path=_candidate)
+            break
 
     # SMTP_HOST - адрес SMTP сервера, например: smtp.gmail.com
     smtp_host = _get_env("SMTP_HOST")
@@ -30,7 +39,7 @@ def send_reservation_email(*, name: str, phone: str, guests: str, date: str, des
     # FROM_EMAIL - адрес отправителя (можно не задавать, тогда будет использоваться SMTP_USER)
     from_email = os.environ.get("FROM_EMAIL", smtp_user)
     # SMTP_USE_TLS - использовать ли STARTTLS (true/false). Для порта 587 укажите true
-    use_tls = os.environ.get("SMTP_USE_TLS", "true").lower() in {'1', 'true', 'yes'}
+    use_tls = os.environ.get("SMTP_USE_TLS", "true").lower() in {"1", "true", "yes"}
 
     subject = "Новое бронирование"
     body = (
@@ -68,9 +77,13 @@ def send_reservation_email(*, name: str, phone: str, guests: str, date: str, des
         print("Письмо успешно отправлено!")
 
     except smtplib.SMTPAuthenticationError as err:
-        raise RuntimeError("Ошибка аутентификации SMTP: проверьте логин/пароль или пароль приложения") from err
+        raise RuntimeError(
+            "Ошибка аутентификации SMTP: проверьте логин/пароль или пароль приложения"
+        ) from err
     except smtplib.SMTPConnectError as err:
-        raise RuntimeError("Ошибка подключения к SMTP серверу: проверьте хост/порт/доступ в сеть") from err
+        raise RuntimeError(
+            "Ошибка подключения к SMTP серверу: проверьте хост/порт/доступ в сеть"
+        ) from err
     except smtplib.SMTPException as err:
         raise RuntimeError(f"SMTP ошибка: {err}") from err
     except Exception as err:

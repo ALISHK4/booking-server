@@ -5,12 +5,29 @@ from flask import Flask, jsonify, request
 from flask_cors import CORS
 from flask_sqlalchemy import SQLAlchemy
 
-from backend.email_service import send_reservation_email
+try:
+    from backend.email_service import send_reservation_email
+except ImportError:
+    from email_service import send_reservation_email
 
-_DOTENV_PATH = os.path.join(os.path.dirname(__file__), ".env")
-load_dotenv(dotenv_path=_DOTENV_PATH)
+# Ищем .env в нескольких местах: backend/, корень проекта, /etc/secrets/ (Render)
+_DOTENV_CANDIDATES = [
+    os.path.join(os.path.dirname(__file__), ".env"),  # backend/.env
+    os.path.join(os.path.dirname(__file__), "..", ".env"),  # корень проекта
+    "/etc/secrets/.env",  # Render Secret Files
+]
 
-print(f"[dotenv] path={_DOTENV_PATH} exists={os.path.exists(_DOTENV_PATH)}")
+_DOTENV_PATH = None
+for _candidate in _DOTENV_CANDIDATES:
+    if os.path.exists(_candidate):
+        _DOTENV_PATH = _candidate
+        break
+
+if _DOTENV_PATH:
+    load_dotenv(dotenv_path=_DOTENV_PATH)
+    print(f"[dotenv] загружен из: {_DOTENV_PATH}")
+else:
+    print("[dotenv] .env файл не найден, используются переменные окружения системы")
 print(
     "[env] keys:",
     {
@@ -111,10 +128,22 @@ def create_app() -> Flask:
             print("❌ DB ERROR:", exc)
             return jsonify({"ok": False, "error": str(exc)}), 500
 
-        # ❌ EMAIL ВРЕМЕННО ОТКЛЮЧЕН
-        print("📧 EMAIL SKIPPED (disabled for testing)")
+        try:
+            send_reservation_email(
+                name=name,
+                phone=phone,
+                guests=guests,
+                date=date,
+                destination=destination,
+            )
+            print("📧 Email отправлен")
+        except Exception as exc:
+            print("❌ EMAIL ERROR:", exc)
+            return jsonify(
+                {"ok": False, "error": f"Ошибка отправки письма: {exc}"}
+            ), 500
 
-        return jsonify({"ok": True, "message": "Бронирование принято"}), 200
+        return jsonify({"ok": True, "message": "Бронирование отправлено"}), 200
 
     return app
 
