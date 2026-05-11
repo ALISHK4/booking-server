@@ -3,7 +3,7 @@ from flask import Flask, request, jsonify
 from flask_cors import CORS
 from dotenv import load_dotenv
 from flask_sqlalchemy import SQLAlchemy
-from email_service import send_reservation_email
+from backend.email_service import send_reservation_email
 
 
 _DOTENV_PATH = os.path.join(os.path.dirname(__file__), ".env")
