@@ -1,19 +1,23 @@
 import os
-from flask import Flask, request, jsonify
-from flask_cors import CORS
-from dotenv import load_dotenv
-from flask_sqlalchemy import SQLAlchemy
-from backend.email_service import send_reservation_email
 
+from dotenv import load_dotenv
+from flask import Flask, jsonify, request
+from flask_cors import CORS
+from flask_sqlalchemy import SQLAlchemy
+
+from backend.email_service import send_reservation_email
 
 _DOTENV_PATH = os.path.join(os.path.dirname(__file__), ".env")
 load_dotenv(dotenv_path=_DOTENV_PATH)
 
 print(f"[dotenv] path={_DOTENV_PATH} exists={os.path.exists(_DOTENV_PATH)}")
-print("[env] keys:", {
-    k: (os.environ.get(k)[:3] + "***" if os.environ.get(k) else None)
-    for k in ["SMTP_HOST", "SMTP_PORT", "SMTP_USER", "TO_EMAIL", "SMTP_USE_TLS"]
-})
+print(
+    "[env] keys:",
+    {
+        k: (os.environ.get(k)[:3] + "***" if os.environ.get(k) else None)
+        for k in ["SMTP_HOST", "SMTP_PORT", "SMTP_USER", "TO_EMAIL", "SMTP_USE_TLS"]
+    },
+)
 
 
 db = SQLAlchemy()
@@ -47,6 +51,10 @@ def create_app() -> Flask:
     with app.app_context():
         db.create_all()
 
+    @app.get("/")
+    def index():
+        return jsonify({"status": "ok", "message": "Booking API is running"}), 200
+
     @app.get("/health")
     def health():
         print("HEALTH CHECK OK")
@@ -64,17 +72,23 @@ def create_app() -> Flask:
         date = data.get("date", "").strip()
         destination = data.get("Destination", "").strip()
 
-        missing = [k for k, v in {
-            "Name": name,
-            "Number": phone,
-            "Guests": guests,
-            "date": date,
-            "Destination": destination,
-        }.items() if not v]
+        missing = [
+            k
+            for k, v in {
+                "Name": name,
+                "Number": phone,
+                "Guests": guests,
+                "date": date,
+                "Destination": destination,
+            }.items()
+            if not v
+        ]
 
         if missing:
             print("❌ Missing fields:", missing)
-            return jsonify({"ok": False, "error": f"Отсутствуют поля: {', '.join(missing)}"}), 400
+            return jsonify(
+                {"ok": False, "error": f"Отсутствуют поля: {', '.join(missing)}"}
+            ), 400
 
         try:
             guests_int = int(guests)
