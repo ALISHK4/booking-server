@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <title>Бронирование — WoOx Travel</title>
+    <meta name="description" content="Оформите заявку на тур: Франция, Карибы, Швейцария. Заполните форму бронирования и мы свяжемся с вами.">
+
+    <!-- Основной CSS Bootstrap -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Дополнительные файлы CSS -->
+    <link rel="stylesheet" href="assets/css/fontawesome.css">
+    <link rel="stylesheet" href="assets/css/templatemo-woox-travel.css">
+    <link rel="stylesheet" href="assets/css/owl.css">
+    <link rel="stylesheet" href="assets/css/animate.css">
+    <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css"/>
+    <style>
+      .reservation-form #reservation-form #chooseGuests:invalid {
+        color: #9aa0a6 !important;
+        font-weight: 400;
+      }
+
+      #chooseGuests option {
+        color: #2a2a2a;
+      }
+
+      .reservation-form #reservation-form {
+        background: #ffffff;
+        box-shadow: 0 14px 34px rgba(20, 54, 58, 0.12);
+      }
+
+      .reservation-form #reservation-form input,
+      .reservation-form #reservation-form select {
+        border: 1px solid #d9e5e8;
+        background-color: #fbfefe;
+        color: #1f2937;
+        font-weight: 500;
+        transition: border-color 0.2s ease, box-shadow 0.2s ease;
+      }
+
+      .reservation-form #reservation-form input::placeholder {
+        color: #9ca3af;
+        font-weight: 400;
+      }
+
+      .reservation-form #reservation-form input:focus,
+      .reservation-form #reservation-form select:focus {
+        border-color: #22b3c1;
+        box-shadow: 0 0 0 3px rgba(34, 179, 193, 0.18);
+        outline: none;
+      }
+
+      .reservation-form #reservation-form .main-button {
+        margin-top: 8px;
+      }
+
+      .reservation-form #reservation-form input.date {
+        color: #1f2937 !important;
+      }
+
+      .phone-input-group {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .phone-country-wrap {
+        width: 44%;
+        min-width: 190px;
+        position: relative;
+      }
+
+      .country-toggle {
+        width: 100%;
+        height: 46px;
+        border: 1px solid #d9e5e8;
+        border-radius: 23px;
+        background: #fbfefe;
+        color: #1f2937;
+        font-weight: 500;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        padding: 0 40px 0 12px;
+        cursor: pointer;
+        white-space: nowrap;
+        position: relative;
+      }
+
+      .country-current {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        min-width: 0;
+      }
+
+      .country-current span {
+        white-space: nowrap;
+      }
+
+      .country-current img {
+        width: 22px;
+        height: 16px;
+        object-fit: cover;
+        border-radius: 2px;
+        border: 1px solid #d1d5db;
+      }
+
+      .country-toggle i {
+        position: absolute;
+        right: 14px;
+        top: 50%;
+        transform: translateY(-50%);
+        line-height: 1;
+        font-size: 12px;
+        margin: 0;
+        pointer-events: none;
+      }
+
+      .country-menu {
+        position: absolute;
+        top: calc(100% + 6px);
+        left: 0;
+        right: 0;
+        max-height: 240px;
+        overflow-y: auto;
+        background: #fff;
+        border: 1px solid #d9e5e8;
+        border-radius: 12px;
+        box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12);
+        z-index: 30;
+        display: none;
+      }
+
+      .phone-country-wrap.open .country-menu {
+        display: block;
+      }
+
+      .country-option {
+        width: 100%;
+        border: 0;
+        background: #fff;
+        text-align: left;
+        padding: 9px 12px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+        cursor: pointer;
+      }
+
+      .country-option:hover {
+        background: #f1fbfd;
+      }
+
+      .country-option .left {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .country-option img {
+        width: 22px;
+        height: 16px;
+        object-fit: cover;
+        border-radius: 2px;
+        border: 1px solid #d1d5db;
+      }
+
+      .phone-number-wrap {
+        flex: 1;
+      }
+
+      .phone-number-combo {
+        height: 46px;
+        border: 1px solid #d9e5e8;
+        border-radius: 23px;
+        background: #fbfefe;
+        display: flex;
+        align-items: center;
+        overflow: hidden;
+      }
+
+      .phone-code-prefix {
+        color: #1f2937;
+        font-weight: 600;
+        padding: 0 10px 0 14px;
+        white-space: nowrap;
+      }
+
+      .phone-number-combo input {
+        border: 0 !important;
+        box-shadow: none !important;
+        background: transparent !important;
+        margin: 0 !important;
+        height: 44px !important;
+        border-radius: 0 !important;
+        padding-left: 0 !important;
+      }
+
+      .phone-number-combo:focus-within {
+        border-color: #22b3c1;
+        box-shadow: 0 0 0 3px rgba(34, 179, 193, 0.18);
+      }
+
+      @media (max-width: 767px) {
+        .phone-input-group {
+          flex-direction: column;
+          align-items: stretch;
+          gap: 0;
+        }
+
+        .phone-country-wrap {
+          width: 100%;
+          min-width: 100%;
+        }
+      }
+    </style>
+<!--
+
+TemplateMo 580 Woox Travel
+
+https://templatemo.com/tm-580-woox-travel
+
+-->
+  </head>
+
+<body>
+
+  <!-- ***** Начало прелоадера ***** -->
+  <div id="js-preloader" class="js-preloader">
+    <div class="preloader-inner">
+      <span class="dot"></span>
+      <div class="dots">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+  </div>
+  <!-- ***** Конец прелоадера ***** -->
+
+  <!-- ***** Начало области заголовка ***** -->
+  <header class="header-area header-sticky">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <nav class="main-nav">
+                    <!-- ***** Начало логотипа ***** -->
+                    <a href="index.html" class="logo">
+                        <img src="assets/images/logo.png" alt="">
+                    </a>
+                    <!-- ***** Конец логотипа ***** -->
+                    <!-- ***** Начало меню ***** -->
+                    <ul class="nav">
+                        <li><a href="index.html">Главная</a></li>
+                        <li><a href="about.html">О нас</a></li>
+                        <li><a href="reservation.html">Бронирование</a></li>
+                    </ul>   
+                    <a class='menu-trigger'>
+                        <span>Меню</span>
+                    </a>
+                    <!-- ***** Конец меню ***** -->
+                </nav>
+            </div>
+        </div>
+    </div>
+  </header>
+  <!-- ***** Конец области заголовка ***** -->
+
+  <div class="second-page-heading">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <h4>Заполните форму бронирования</h4>
+          <h2>Мы свяжемся с вами в течение дня</h2>
+          <p>Укажите контактные данные, даты поездки и желаемое направление. Наш менеджер подтвердит детали и подберёт лучшие варианты.</p>
+          <div class="main-button"><a href="about.html">Узнать больше</a></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="more-info reservation-info">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-4 col-sm-6">
+          <div class="info-item">
+            <i class="fa fa-phone"></i>
+            <h4>Сделайте телефонный звонок</h4>
+            <a href="#">+123 456 789 (0)</a>
+          </div>
+        </div>
+        <div class="col-lg-4 col-sm-6">
+          <div class="info-item">
+            <i class="fa fa-envelope"></i>
+            <h4>Свяжитесь с нами по электронной почте</h4>
+            <a href="#">company@email.com</a>
+          </div>
+        </div>
+        <div class="col-lg-4 col-sm-6">
+          <div class="info-item">
+            <i class="fa fa-map-marker"></i>
+            <h4>Посетите наш офис</h4>
+            <a href="#">ул. Джамалутдина Атаева, 5, Махачкала, Дагестан</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="reservation-form" id="booking-form">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <div id="map" style="width: 100%; height: 450px; border-top-left-radius: 23px; border-top-right-radius: 23px;"></div>
+          <script src="https://api-maps.yandex.ru/2.1/?apikey=YOUR_API_KEY&lang=ru_RU" type="text/javascript"></script>
+          <script type="text/javascript">
+            ymaps.ready(function () {
+              var myMap = new ymaps.Map('map', {
+                center: [42.987063, 47.473843], // Координаты для улицы Джамалутдина Атаева, 5 (Ростов-на-Дону)
+                zoom: 15
+              });
+              
+              var myPlacemark = new ymaps.Placemark([42.987063, 47.473843], {
+                balloonContent: 'Улица Джамалутдина Атаева, 5'
+              }, {
+                preset: 'islands#redDotIcon'
+              });
+              
+              myMap.geoObjects.add(myPlacemark);
+            });
+          </script>
+        </div>
+        <div class="col-lg-12">
+          <form id="reservation-form" name="gs" method="post" role="form" action="http://localhost:5000/api/reservations">
+            <div class="row">
+              <div class="col-lg-12">
+                <h4>Сделайте ваше <em>бронирование</em> через эту <em>форму</em></h4>
+              </div>
+              <div class="col-lg-6">
+                  <fieldset>
+                      <label for="Name" class="form-label">Ваше имя</label>
+                      <input type="text" name="Name" class="Name" placeholder="Напр. Джон Смит" autocomplete="on" required>
+                  </fieldset>
+              </div>
+              <div class="col-lg-6">
+                <fieldset>
+                    <label for="Number" class="form-label">Ваш номер телефона</label>
+                    <div class="phone-input-group">
+                      <div class="phone-country-wrap">
+                        <input type="hidden" id="phoneCountry" name="PhoneCountry" value="RU">
+                        <button type="button" id="countryToggle" class="country-toggle" aria-haspopup="listbox" aria-expanded="false">
+                          <span class="country-current">
+                            <img id="countryFlag" src="assets/images/flags/ru.png" alt="Флаг: Россия">
+                            <span id="countryLabel">Россия (+7)</span>
+                          </span>
+                          <i class="fa fa-chevron-down"></i>
+                        </button>
+                        <div id="countryMenu" class="country-menu" role="listbox">
+                          <button type="button" class="country-option" data-value="RU" data-code="+7" data-country="Россия" data-flag="assets/images/flags/ru.png" data-len="10">
+                            <span class="left"><img src="assets/images/flags/ru.png" alt="">Россия</span><span>+7</span>
+                          </button>
+                          <button type="button" class="country-option" data-value="BY" data-code="+375" data-country="Беларусь" data-flag="assets/images/flags/by.png" data-len="9">
+                            <span class="left"><img src="assets/images/flags/by.png" alt="">Беларусь</span><span>+375</span>
+                          </button>
+                          <button type="button" class="country-option" data-value="KZ" data-code="+7" data-country="Казахстан" data-flag="assets/images/flags/kz.png" data-len="10">
+                            <span class="left"><img src="assets/images/flags/kz.png" alt="">Казахстан</span><span>+7</span>
+                          </button>
+                          <button type="button" class="country-option" data-value="KG" data-code="+996" data-country="Киргизия" data-flag="assets/images/flags/kg.png" data-len="9">
+                            <span class="left"><img src="assets/images/flags/kg.png" alt="">Киргизия</span><span>+996</span>
+                          </button>
+                          <button type="button" class="country-option" data-value="AM" data-code="+374" data-country="Армения" data-flag="assets/images/flags/am.png" data-len="8">
+                            <span class="left"><img src="assets/images/flags/am.png" alt="">Армения</span><span>+374</span>
+                          </button>
+                          <button type="button" class="country-option" data-value="AZ" data-code="+994" data-country="Азербайджан" data-flag="assets/images/flags/az.png" data-len="9">
+                            <span class="left"><img src="assets/images/flags/az.png" alt="">Азербайджан</span><span>+994</span>
+                          </button>
+                          <button type="button" class="country-option" data-value="UZ" data-code="+998" data-country="Узбекистан" data-flag="assets/images/flags/uz.png" data-len="9">
+                            <span class="left"><img src="assets/images/flags/uz.png" alt="">Узбекистан</span><span>+998</span>
+                          </button>
+                          <button type="button" class="country-option" data-value="TJ" data-code="+992" data-country="Таджикистан" data-flag="assets/images/flags/tj.png" data-len="9">
+                            <span class="left"><img src="assets/images/flags/tj.png" alt="">Таджикистан</span><span>+992</span>
+                          </button>
+                          <button type="button" class="country-option" data-value="MD" data-code="+373" data-country="Молдова" data-flag="assets/images/flags/md.png" data-len="8">
+                            <span class="left"><img src="assets/images/flags/md.png" alt="">Молдова</span><span>+373</span>
+                          </button>
+                          <button type="button" class="country-option" data-value="TM" data-code="+993" data-country="Туркменистан" data-flag="assets/images/flags/tm.png" data-len="8">
+                            <span class="left"><img src="assets/images/flags/tm.png" alt="">Туркменистан</span><span>+993</span>
+                          </button>
+                        </div>
+                      </div>
+                      <div class="phone-number-wrap">
+                        <div class="phone-number-combo">
+                          <span id="phoneCodePrefix" class="phone-code-prefix">+7</span>
+                          <input type="tel" id="phoneInput" name="Number" class="Number" placeholder="(___) ___-__-__" inputmode="numeric" autocomplete="tel" title="Введите номер согласно выбранной стране" required>
+                        </div>
+                      </div>
+                    </div>
+                </fieldset>
+              </div>
+              <div class="col-lg-6">
+                <fieldset>
+                    <label for="chooseGuests" class="form-label">Количество гостей</label>
+                    <select name="Guests" class="form-select" aria-label="Пример выбора по умолчанию" id="chooseGuests" required>
+                        <option value="" disabled selected hidden>Напр. 3 или 4</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
+                    </select>
+                </fieldset>
+            </div>
+              <div class="col-lg-6">
+                <fieldset>
+                    <label for="Number" class="form-label">Дата заезда</label>
+                    <input type="date" name="date" class="date" required>
+                </fieldset>
+              </div>
+              <div class="col-lg-12">
+                  <fieldset>
+                      <label for="chooseDestination" class="form-label">Выберите направление</label>
+                      <select name="Destination" class="form-select" aria-label="Пример выбора по умолчанию" id="chooseCategory" onChange="this.form.click()">
+                          <option value="France, Paris">Франция, Париж</option>
+                          <option value="Switzerland, Lausanne" selected>Швейцария, Лозанна</option>
+                          <option value="Cuba, Havana">Куба, Гавана</option>
+                          <option value="Dominican Republic, Punta Cana">Доминикана, Пунта-Кана</option>
+                          <option value="Jamaica, Kingston">Ямайка, Кингстон</option>
+                          <option value="United Kingdom, London">Великобритания, Лондон</option>
+                          <option value="Kosovo, Pristina">Косово, Приштина</option>
+                          <option value="Switzerland, Zurich">Швейцария, Цюрих</option>
+                      </select>
+                  </fieldset>
+              </div>
+              <div class="col-lg-12">                        
+                  <fieldset>
+                      <button type="submit" class="main-button">Отправить заявку</button>
+                  </fieldset>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <section class="brand-contact">
+    <div class="container">
+      <div class="contact-card">
+        <div class="row">
+          <div class="col-lg-8">
+            <h3>Быстрые каналы связи</h3>
+            <p>Если удобнее не заполнять форму, напишите нам напрямую в соцсети или мессенджеры.</p>
+            <ul>
+              <li><i class="fa fa-phone"></i> +7 (928) 456-78-90</li>
+              <li><i class="fa fa-envelope"></i> hello@wooxtravel.ru</li>
+              <li><i class="fa fa-clock-o"></i> Ежедневно: 09:00 - 21:00</li>
+            </ul>
+          </div>
+          <div class="col-lg-4">
+            <p>Подписывайтесь:</p>
+            <div class="social-links">
+              <a href="https://vk.com/wooxtravel" target="_blank" rel="noopener noreferrer" aria-label="VK"><i class="fa fa-vk"></i></a>
+              <a href="https://instagram.com/wooxtravel" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fa fa-instagram"></i></a>
+              <a href="https://facebook.com/wooxtravel" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><i class="fa fa-facebook"></i></a>
+              <a href="https://dzen.ru/wooxtravel" target="_blank" rel="noopener noreferrer" aria-label="Yandex Dzen"><i class="fa fa-rss"></i></a>
+              <a href="https://t.me/wooxtravel" target="_blank" rel="noopener noreferrer" aria-label="Telegram"><i class="fa fa-telegram"></i></a>
+              <a href="https://wa.me/79284567890" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp"><i class="fa fa-whatsapp"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <p>Авторское право © 2025 <a href="#">WoOx Travel</a>. Все права защищены.</p>
+          <div class="footer-links">
+            <a href="index.html">Главная</a>
+            <a href="about.html">О компании</a>
+            <a href="mailto:hello@wooxtravel.ru">Почта</a>
+            <a href="tel:+79284567890">Телефон</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+
+ 
+  <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+
+  <script src="assets/js/isotope.min.js"></script>
+  <script src="assets/js/owl-carousel.js"></script>
+  <script src="assets/js/wow.js"></script>
+  <script src="assets/js/tabs.js"></script>
+  <script src="assets/js/popup.js"></script>
+  <script src="assets/js/custom.js"></script>
+  <script src="assets/js/reservation.js"></script>
+
+  <script>
+    // Подсветка активного пункта меню в шапке
+    $(function() {
+      var path = window.location.pathname.split("/").pop();
+      if (!path) {
+        path = "index.html";
+      }
+
+      $('.main-nav .nav a').each(function() {
+        var href = $(this).attr('href');
+        if (href === path) {
+          $('.main-nav .nav a').removeClass('active');
+          $(this).addClass('active');
+        }
+      });
+    });
+  </script>
+
+  </body>
+
+</html>

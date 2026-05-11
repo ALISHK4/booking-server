@@ -1,0 +1,961 @@
+<!doctype html>
+<html lang="ru">
+    <head>
+        <meta charset="utf-8" />
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1, shrink-to-fit=no"
+        />
+
+        <link
+            href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"
+            rel="stylesheet"
+        />
+
+        <title>Спецпредложения — WoOx Travel</title>
+        <meta
+            name="description"
+            content="Акции и специальные предложения на туры: Франция, Карибы, Швейцария. Забронируйте выгодно сегодня."
+        />
+
+        <!-- Основной CSS Bootstrap -->
+        <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+
+        <!-- Дополнительные файлы CSS -->
+        <link rel="stylesheet" href="assets/css/fontawesome.css" />
+        <link rel="stylesheet" href="assets/css/woox-travel.css" />
+        <link rel="stylesheet" href="assets/css/owl.css" />
+        <link rel="stylesheet" href="assets/css/animate.css" />
+        <link rel="stylesheet" href="assets/css/deals-cards.css" />
+        <link
+            rel="stylesheet"
+            href="https://unpkg.com/swiper@7/swiper-bundle.min.css"
+        />
+    </head>
+
+    <body>
+        <!-- прелоадер -->
+        <div id="js-preloader" class="js-preloader">
+            <div class="preloader-inner">
+                <span class="dot"></span>
+                <div class="dots">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+
+        <!-- шапка -->
+        <header class="header-area header-sticky">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <nav class="main-nav">
+                            <!-- лого -->
+                            <a href="index.html" class="logo">
+                                <img src="assets/images/logo.png" alt="" />
+                            </a>
+
+                            <!-- меню -->
+                            <ul class="nav">
+                                <li><a href="index.html">Главная</a></li>
+                                <li><a href="about.html">О нас</a></li>
+                                <li><a href="deals.html">Акции</a></li>
+                                <li>
+                                    <a href="reservation.html">Бронирование</a>
+                                </li>
+                            </ul>
+                            <a class="menu-trigger">
+                                <span>Меню</span>
+                            </a>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <div class="page-heading">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h4>
+                            Ознакомьтесь с нашими еженедельными предложениями
+                        </h4>
+                        <h2>Удивительные цены и многое другое</h2>
+                        <div class="border-button">
+                            <a href="about.html">Узнать больше</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="search-form">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <form
+                            id="search-form"
+                            name="gs"
+                            method="submit"
+                            role="search"
+                            action="#"
+                        >
+                            <div class="row">
+                                <div class="col-lg-2">
+                                    <h4>Сортировать предложения по:</h4>
+                                </div>
+                                <div class="col-lg-4">
+                                    <fieldset>
+                                        <select
+                                            name="Location"
+                                            class="form-select"
+                                            aria-label="Пример выбора по умолчанию"
+                                            id="chooseLocation"
+                                            onChange="this.form.click()"
+                                        >
+                                            <option value="" selected>
+                                                Направления
+                                            </option>
+                                            <option value="France">
+                                                Франция
+                                            </option>
+                                            <option value="Caribbean">
+                                                Карибы
+                                            </option>
+                                            <option value="Switzerland">
+                                                Швейцария
+                                            </option>
+                                            <option value="Cuba">Куба</option>
+                                            <option value="Dominican Republic">
+                                                Доминикана
+                                            </option>
+                                            <option value="Jamaica">
+                                                Ямайка
+                                            </option>
+                                            <option value="United Kingdom">
+                                                Великобритания
+                                            </option>
+                                        </select>
+                                    </fieldset>
+                                </div>
+                                <div class="col-lg-4">
+                                    <fieldset>
+                                        <select
+                                            name="Price"
+                                            class="form-select"
+                                            aria-label="Пример выбора по умолчанию"
+                                            id="choosePrice"
+                                            onChange="this.form.click()"
+                                        >
+                                            <option value="" selected>
+                                                Диапазон цен
+                                            </option>
+                                            <option value="0-1000">
+                                                $0 - $1,000
+                                            </option>
+                                            <option value="1000-1500">
+                                                $1,000 - $1,500
+                                            </option>
+                                            <option value="1500-2000">
+                                                $1,500 - $2,000
+                                            </option>
+                                            <option value="2000-2500">
+                                                $2,000 - $2,500
+                                            </option>
+                                            <option value="2500+">
+                                                $2,500+
+                                            </option>
+                                        </select>
+                                    </fieldset>
+                                </div>
+                                <div class="col-lg-2">
+                                    <fieldset>
+                                        <button class="border-button">
+                                            Поиск результатов
+                                        </button>
+                                    </fieldset>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="amazing-deals">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6 offset-lg-3">
+                        <div class="section-heading text-center">
+                            <h2>Актуальные предложения</h2>
+                            <p>
+                                Подборка выгодных туров во Францию, на Карибы и
+                                в Швейцарию. Количество мест ограничено.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Статичные карточки с переключением страниц -->
+                    <div class="col-lg-12">
+                        <div class="static-deals-wrapper">
+                            <!-- Радио-кнопки для переключения страниц -->
+                            <input
+                                type="radio"
+                                name="static-deals-nav"
+                                id="page1-radio"
+                                checked
+                            />
+                            <input
+                                type="radio"
+                                name="static-deals-nav"
+                                id="page2-radio"
+                            />
+
+                            <!-- Контент страниц -->
+                            <div class="static-deals-content">
+                                <!-- Страница 1 -->
+                                <div
+                                    id="static-deals-page-1"
+                                    class="static-deals-page"
+                                >
+                                    <div class="row">
+                                        <!-- Карточка 1: Франция, Париж -->
+                                        <div
+                                            class="col-lg-6 col-sm-6 deal-card"
+                                            data-location="France"
+                                            data-price="1200"
+                                        >
+                                            <div class="item">
+                                                <div class="row">
+                                                    <div class="col-lg-6">
+                                                        <div class="image">
+                                                            <img
+                                                                src="assets/images/deals-01.jpg"
+                                                                alt="Франция, Париж"
+                                                            />
+                                                        </div>
+                                                    </div>
+                                                    <div
+                                                        class="col-lg-6 align-self-center"
+                                                    >
+                                                        <div class="content">
+                                                            <h4>
+                                                                Франция, Париж
+                                                            </h4>
+                                                            <span
+                                                                class="info price"
+                                                                >$1,200</span
+                                                            >
+                                                            <div class="row">
+                                                                <div
+                                                                    class="col-6"
+                                                                >
+                                                                    <i
+                                                                        class="fa fa-clock"
+                                                                    ></i>
+                                                                    <span
+                                                                        class="list"
+                                                                        >5
+                                                                        дней</span
+                                                                    >
+                                                                </div>
+                                                                <div
+                                                                    class="col-6"
+                                                                >
+                                                                    <i
+                                                                        class="fa fa-map"
+                                                                    ></i>
+                                                                    <span
+                                                                        class="list"
+                                                                        >Ежедневные
+                                                                        места</span
+                                                                    >
+                                                                </div>
+                                                            </div>
+                                                            <p>
+                                                                Посетите
+                                                                Эйфелеву башню,
+                                                                Лувр и
+                                                                Нотр-Дам.<br />Перелёт,
+                                                                отель в центре
+                                                                Парижа и
+                                                                обзорная
+                                                                экскурсия.<br />Романтическая
+                                                                прогулка по Сене
+                                                                и изысканные
+                                                                ужины.
+                                                            </p>
+                                                            <div
+                                                                class="main-button"
+                                                            >
+                                                                <a
+                                                                    href="reservation.html?destination=France, Paris#booking-form"
+                                                                    >Сделать
+                                                                    бронирование</a
+                                                                >
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Карточка 2: Карибы, Гавана -->
+                                        <div
+                                            class="col-lg-6 col-sm-6 deal-card"
+                                            data-location="Caribbean"
+                                            data-price="1500"
+                                        >
+                                            <div class="item">
+                                                <div class="row">
+                                                    <div class="col-lg-6">
+                                                        <div class="image">
+                                                            <img
+                                                                src="assets/images/deals-02.jpg"
+                                                                alt="Карибы, Гавана"
+                                                            />
+                                                        </div>
+                                                    </div>
+                                                    <div
+                                                        class="col-lg-6 align-self-center"
+                                                    >
+                                                        <div class="content">
+                                                            <h4>
+                                                                Карибы, Гавана
+                                                            </h4>
+                                                            <span
+                                                                class="info price"
+                                                                >$1,500</span
+                                                            >
+                                                            <div class="row">
+                                                                <div
+                                                                    class="col-6"
+                                                                >
+                                                                    <i
+                                                                        class="fa fa-clock"
+                                                                    ></i>
+                                                                    <span
+                                                                        class="list"
+                                                                        >7
+                                                                        дней</span
+                                                                    >
+                                                                </div>
+                                                                <div
+                                                                    class="col-6"
+                                                                >
+                                                                    <i
+                                                                        class="fa fa-map"
+                                                                    ></i>
+                                                                    <span
+                                                                        class="list"
+                                                                        >Еженедельные
+                                                                        вылеты</span
+                                                                    >
+                                                                </div>
+                                                            </div>
+                                                            <p>
+                                                                Окунитесь в
+                                                                атмосферу
+                                                                Карибского моря
+                                                                и кубинской
+                                                                культуры.<br />Отель
+                                                                4*, экскурсии по
+                                                                старой Гаване и
+                                                                музеям.<br />Пляжный
+                                                                отдых, сальса и
+                                                                кубинские
+                                                                сигары.
+                                                            </p>
+                                                            <div
+                                                                class="main-button"
+                                                            >
+                                                                <a
+                                                                    href="reservation.html?destination=Caribbean, Havana#booking-form"
+                                                                    >Сделать
+                                                                    бронирование</a
+                                                                >
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Карточка 3: Швейцария, Лозанна -->
+                                        <div
+                                            class="col-lg-6 col-sm-6 deal-card"
+                                            data-location="Switzerland"
+                                            data-price="1800"
+                                        >
+                                            <div class="item">
+                                                <div class="row">
+                                                    <div class="col-lg-6">
+                                                        <div class="image">
+                                                            <img
+                                                                src="assets/images/deals-03.jpg"
+                                                                alt="Швейцария, Лозанна"
+                                                            />
+                                                        </div>
+                                                    </div>
+                                                    <div
+                                                        class="col-lg-6 align-self-center"
+                                                    >
+                                                        <div class="content">
+                                                            <h4>
+                                                                Швейцария,
+                                                                Лозанна
+                                                            </h4>
+                                                            <span
+                                                                class="info price"
+                                                                >$1,800</span
+                                                            >
+                                                            <div class="row">
+                                                                <div
+                                                                    class="col-6"
+                                                                >
+                                                                    <i
+                                                                        class="fa fa-clock"
+                                                                    ></i>
+                                                                    <span
+                                                                        class="list"
+                                                                        >6
+                                                                        дней</span
+                                                                    >
+                                                                </div>
+                                                                <div
+                                                                    class="col-6"
+                                                                >
+                                                                    <i
+                                                                        class="fa fa-map"
+                                                                    ></i>
+                                                                    <span
+                                                                        class="list"
+                                                                        >Еженедельные
+                                                                        вылеты</span
+                                                                    >
+                                                                </div>
+                                                            </div>
+                                                            <p>
+                                                                Откройте красоту
+                                                                Леманского озера
+                                                                и Альп.<br />Олимпийский
+                                                                музей, прогулки
+                                                                по старому
+                                                                городу.<br />Дегустация
+                                                                швейцарских
+                                                                сыров и
+                                                                шоколада.
+                                                            </p>
+                                                            <div
+                                                                class="main-button"
+                                                            >
+                                                                <a
+                                                                    href="reservation.html?destination=Switzerland, Lausanne#booking-form"
+                                                                    >Сделать
+                                                                    бронирование</a
+                                                                >
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Карточка 4: Куба, Гавана -->
+                                        <div
+                                            class="col-lg-6 col-sm-6 deal-card"
+                                            data-location="Cuba"
+                                            data-price="1300"
+                                        >
+                                            <div class="item">
+                                                <div class="row">
+                                                    <div class="col-lg-6">
+                                                        <div class="image">
+                                                            <img
+                                                                src="assets/images/deals-04.jpg"
+                                                                alt="Куба, Гавана"
+                                                            />
+                                                        </div>
+                                                    </div>
+                                                    <div
+                                                        class="col-lg-6 align-self-center"
+                                                    >
+                                                        <div class="content">
+                                                            <h4>
+                                                                Куба, Гавана
+                                                            </h4>
+                                                            <span
+                                                                class="info price"
+                                                                >$1,300</span
+                                                            >
+                                                            <div class="row">
+                                                                <div
+                                                                    class="col-6"
+                                                                >
+                                                                    <i
+                                                                        class="fa fa-clock"
+                                                                    ></i>
+                                                                    <span
+                                                                        class="list"
+                                                                        >8
+                                                                        дней</span
+                                                                    >
+                                                                </div>
+                                                                <div
+                                                                    class="col-6"
+                                                                >
+                                                                    <i
+                                                                        class="fa fa-map"
+                                                                    ></i>
+                                                                    <span
+                                                                        class="list"
+                                                                        >Еженедельные
+                                                                        вылеты</span
+                                                                    >
+                                                                </div>
+                                                            </div>
+                                                            <p>
+                                                                Хавана — столица
+                                                                и крупнейший
+                                                                город Кубы.<br />Один
+                                                                из красивейших
+                                                                городов
+                                                                Карибского
+                                                                бассейна.<br />Колониальная
+                                                                архитектура,
+                                                                музыка и танцы.
+                                                            </p>
+                                                            <div
+                                                                class="main-button"
+                                                            >
+                                                                <a
+                                                                    href="reservation.html?destination=Cuba, Havana#booking-form"
+                                                                    >Сделать
+                                                                    бронирование</a
+                                                                >
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Страница 2 -->
+                                <div
+                                    id="static-deals-page-2"
+                                    class="static-deals-page"
+                                >
+                                    <div class="row">
+                                        <!-- Карточка 5: Доминикана, Пунта-Кана -->
+                                        <div
+                                            class="col-lg-6 col-sm-6 deal-card"
+                                            data-location="Dominican Republic"
+                                            data-price="2200"
+                                        >
+                                            <div class="item">
+                                                <div class="row">
+                                                    <div class="col-lg-6">
+                                                        <div class="image">
+                                                            <img
+                                                                src="assets/images/deals-01.jpg"
+                                                                alt="Доминикана, Пунта-Кана"
+                                                            />
+                                                        </div>
+                                                    </div>
+                                                    <div
+                                                        class="col-lg-6 align-self-center"
+                                                    >
+                                                        <div class="content">
+                                                            <h4>
+                                                                Доминикана,
+                                                                Пунта-Кана
+                                                            </h4>
+                                                            <span
+                                                                class="info price"
+                                                                >$2,200</span
+                                                            >
+                                                            <div class="row">
+                                                                <div
+                                                                    class="col-6"
+                                                                >
+                                                                    <i
+                                                                        class="fa fa-clock"
+                                                                    ></i>
+                                                                    <span
+                                                                        class="list"
+                                                                        >9
+                                                                        дней</span
+                                                                    >
+                                                                </div>
+                                                                <div
+                                                                    class="col-6"
+                                                                >
+                                                                    <i
+                                                                        class="fa fa-map"
+                                                                    ></i>
+                                                                    <span
+                                                                        class="list"
+                                                                        >Еженедельные
+                                                                        вылеты</span
+                                                                    >
+                                                                </div>
+                                                            </div>
+                                                            <p>
+                                                                Парадиз на
+                                                                Карибах с
+                                                                белоснежными
+                                                                пляжами.<br />Отдых
+                                                                all inclusive,
+                                                                прямой перелёт и
+                                                                водные виды
+                                                                спорта.<br />Массаж
+                                                                на пляже,
+                                                                меренге и
+                                                                коктейли у моря.
+                                                            </p>
+                                                            <div
+                                                                class="main-button"
+                                                            >
+                                                                <a
+                                                                    href="reservation.html?destination=Dominican Republic, Punta Cana#booking-form"
+                                                                    >Сделать
+                                                                    бронирование</a
+                                                                >
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Карточка 6: Ямайка, Кингстон -->
+                                        <div
+                                            class="col-lg-6 col-sm-6 deal-card"
+                                            data-location="Jamaica"
+                                            data-price="1400"
+                                        >
+                                            <div class="item">
+                                                <div class="row">
+                                                    <div class="col-lg-6">
+                                                        <div class="image">
+                                                            <img
+                                                                src="assets/images/deals-02.jpg"
+                                                                alt="Ямайка, Кингстон"
+                                                            />
+                                                        </div>
+                                                    </div>
+                                                    <div
+                                                        class="col-lg-6 align-self-center"
+                                                    >
+                                                        <div class="content">
+                                                            <h4>
+                                                                Ямайка, Кингстон
+                                                            </h4>
+                                                            <span
+                                                                class="info price"
+                                                                >$1,400</span
+                                                            >
+                                                            <div class="row">
+                                                                <div
+                                                                    class="col-6"
+                                                                >
+                                                                    <i
+                                                                        class="fa fa-clock"
+                                                                    ></i>
+                                                                    <span
+                                                                        class="list"
+                                                                        >7
+                                                                        дней</span
+                                                                    >
+                                                                </div>
+                                                                <div
+                                                                    class="col-6"
+                                                                >
+                                                                    <i
+                                                                        class="fa fa-map"
+                                                                    ></i>
+                                                                    <span
+                                                                        class="list"
+                                                                        >Еженедельные
+                                                                        вылеты</span
+                                                                    >
+                                                                </div>
+                                                            </div>
+                                                            <p>
+                                                                Ямайка — остров
+                                                                музыки рэгге и
+                                                                природных
+                                                                чудес.<br />Водопады
+                                                                Даннс-Ривер,
+                                                                горы Блю
+                                                                Маунтинс.<br />Музей
+                                                                Боба Марли и
+                                                                пляжи Негрила.
+                                                            </p>
+                                                            <div
+                                                                class="main-button"
+                                                            >
+                                                                <a
+                                                                    href="reservation.html?destination=Jamaica, Kingston#booking-form"
+                                                                    >Сделать
+                                                                    бронирование</a
+                                                                >
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Карточка 7: Великобритания, Лондон -->
+                                        <div
+                                            class="col-lg-6 col-sm-6 deal-card"
+                                            data-location="United Kingdom"
+                                            data-price="1600"
+                                        >
+                                            <div class="item">
+                                                <div class="row">
+                                                    <div class="col-lg-6">
+                                                        <div class="image">
+                                                            <img
+                                                                src="assets/images/deals-03.jpg"
+                                                                alt="Великобритания, Лондон"
+                                                            />
+                                                        </div>
+                                                    </div>
+                                                    <div
+                                                        class="col-lg-6 align-self-center"
+                                                    >
+                                                        <div class="content">
+                                                            <h4>
+                                                                Великобритания,
+                                                                Лондон
+                                                            </h4>
+                                                            <span
+                                                                class="info price"
+                                                                >$1,600</span
+                                                            >
+                                                            <div class="row">
+                                                                <div
+                                                                    class="col-6"
+                                                                >
+                                                                    <i
+                                                                        class="fa fa-clock"
+                                                                    ></i>
+                                                                    <span
+                                                                        class="list"
+                                                                        >5
+                                                                        дней</span
+                                                                    >
+                                                                </div>
+                                                                <div
+                                                                    class="col-6"
+                                                                >
+                                                                    <i
+                                                                        class="fa fa-map"
+                                                                    ></i>
+                                                                    <span
+                                                                        class="list"
+                                                                        >Ежедневные
+                                                                        места</span
+                                                                    >
+                                                                </div>
+                                                            </div>
+                                                            <p>
+                                                                Классический
+                                                                Лондон с его
+                                                                сокровищами.<br />Бакингемский
+                                                                дворец, Тауэр,
+                                                                Вестминстер и
+                                                                театры.<br />Прогулка
+                                                                по Темзе и
+                                                                посещение
+                                                                музеев.
+                                                            </p>
+                                                            <div
+                                                                class="main-button"
+                                                            >
+                                                                <a
+                                                                    href="reservation.html?destination=United Kingdom, London#booking-form"
+                                                                    >Сделать
+                                                                    бронирование</a
+                                                                >
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Карточка 8: Швейцария, Цюрих -->
+                                        <div
+                                            class="col-lg-6 col-sm-6 deal-card"
+                                            data-location="Switzerland"
+                                            data-price="2000"
+                                        >
+                                            <div class="item">
+                                                <div class="row">
+                                                    <div class="col-lg-6">
+                                                        <div class="image">
+                                                            <img
+                                                                src="assets/images/deals-04.jpg"
+                                                                alt="Швейцария, Цюрих"
+                                                            />
+                                                        </div>
+                                                    </div>
+                                                    <div
+                                                        class="col-lg-6 align-self-center"
+                                                    >
+                                                        <div class="content">
+                                                            <h4>
+                                                                Швейцария, Цюрих
+                                                            </h4>
+                                                            <span
+                                                                class="info price"
+                                                                >$2,000</span
+                                                            >
+                                                            <div class="row">
+                                                                <div
+                                                                    class="col-6"
+                                                                >
+                                                                    <i
+                                                                        class="fa fa-clock"
+                                                                    ></i>
+                                                                    <span
+                                                                        class="list"
+                                                                        >4
+                                                                        дня</span
+                                                                    >
+                                                                </div>
+                                                                <div
+                                                                    class="col-6"
+                                                                >
+                                                                    <i
+                                                                        class="fa fa-map"
+                                                                    ></i>
+                                                                    <span
+                                                                        class="list"
+                                                                        >Ежедневные
+                                                                        места</span
+                                                                    >
+                                                                </div>
+                                                            </div>
+                                                            <p>
+                                                                Откройте для
+                                                                себя Цюрих,
+                                                                финансовый центр
+                                                                Швейцарии.<br />Цюрихское
+                                                                озеро, старый
+                                                                город и
+                                                                музеи.<br />Шоппинг
+                                                                на Банхофштрассе
+                                                                и дегустация
+                                                                шоколада.
+                                                            </p>
+                                                            <div
+                                                                class="main-button"
+                                                            >
+                                                                <a
+                                                                    href="reservation.html?destination=Switzerland, Zurich#booking-form"
+                                                                    >Сделать
+                                                                    бронирование</a
+                                                                >
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Навигация внизу -->
+                            <div class="static-deals-pagination">
+                                <label for="page1-radio" class="page-button"
+                                    >1</label
+                                >
+                                <label for="page2-radio" class="page-button"
+                                    >2</label
+                                >
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="call-to-action">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8">
+                        <h2>Хотите отправиться в путешествие?</h2>
+                        <h4>Сделайте бронирование, нажав на кнопку</h4>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="border-button">
+                            <a href="reservation.html#booking-form"
+                                >Забронировать сейчас</a
+                            >
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <p>
+                            Авторское право © 2025 <a href="#">WoOx Travel</a>.
+                            Все права защищены.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+        <!-- Скрипты -->
+        <!-- Основной JavaScript Bootstrap -->
+        <script src="vendor/jquery/jquery.min.js"></script>
+        <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+
+        <script src="assets/js/isotope.min.js"></script>
+        <script src="assets/js/owl-carousel.js"></script>
+        <script src="assets/js/wow.js"></script>
+        <script src="assets/js/tabs.js"></script>
+        <script src="assets/js/popup.js"></script>
+        <script src="assets/js/custom.js"></script>
+        <script src="assets/js/deals-filter.js"></script>
+
+        <script>
+            $(".option").click(function () {
+                $(".option").removeClass("active");
+                $(this).addClass("active");
+            });
+        </script>
+
+        <script>
+            // Подсветка активного пункта меню в шапке
+            $(function () {
+                var path = window.location.pathname.split("/").pop();
+                if (!path) {
+                    path = "index.html";
+                }
+
+                $(".main-nav .nav a").each(function () {
+                    var href = $(this).attr("href");
+                    if (href === path) {
+                        $(".main-nav .nav a").removeClass("active");
+                        $(this).addClass("active");
+                    }
+                });
+            });
+        </script>
+    </body>
+</html>
