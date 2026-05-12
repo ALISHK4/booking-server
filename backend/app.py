@@ -31,8 +31,12 @@ else:
 print(
     "[env] keys:",
     {
-        k: (os.environ.get(k)[:3] + "***" if os.environ.get(k) else None)
-        for k in ["SMTP_HOST", "SMTP_PORT", "SMTP_USER", "TO_EMAIL", "SMTP_USE_TLS"]
+        k: (
+            (os.environ.get(k)[:4] + "***" if len(os.environ.get(k, "")) > 4 else "***")
+            if os.environ.get(k)
+            else None
+        )
+        for k in ["RESEND_API_KEY", "TO_EMAIL", "FROM_EMAIL"]
     },
 )
 
